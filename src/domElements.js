@@ -119,6 +119,9 @@ function createToDo() {
     cancelButton.setAttribute('value', 'Cancel');
     cancelButton.textContent = 'Cancel';
     buttonPlace.appendChild(cancelButton);
+    cancelButton.onclick = function () {
+        itemWindow.remove(itemWindow);
+    }
 
     itemWindow.appendChild(buttonPlace);
 
@@ -129,6 +132,10 @@ function createToDoListeners() {
 
     const toDoBtn = document.getElementById('newBtn');
     toDoBtn.addEventListener('click', createToDo);
+}
+
+function cancelPopUpListener() {
+
 }
 
 export {
