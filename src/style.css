@@ -1,0 +1,64 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+#projectSide {
+    border-right: 3px solid black;
+    height: 100vh;
+    background-color: beige;
+}
+
+ul {
+    list-style: none;
+}
+
+.projects {
+    font-size: 20px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.projects:hover {
+    color: blue;
+    font-size: 22px;
+}
+
+#toDoHeader {
+    height: 10vh;
+    background-color: bisque;
+    padding-left: 15px;
+    padding-top: 15px;
+    font-size: 35px;
+    text-align: center;
+}
+
+#toDoPlace {
+    background-color: azure;
+    height: 90vh;
+}
+
+.toDoItem {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid gray;
+    height: 10vh;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.toDoName {
+    font-size: 25px;
+}
+
+.toDoDate {
+    font-size: 25px;
+    color: green;
+    margin-left: auto;
+    padding-right: 50px;
+}
