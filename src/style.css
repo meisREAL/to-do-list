@@ -56,9 +56,14 @@ ul {
     font-size: 25px;
 }
 
+.toDoPriority {
+    font-size: 25px;
+    color: red;
+    margin-left: auto;
+}
+
 .toDoDate {
     font-size: 25px;
     color: green;
-    margin-left: auto;
     padding-right: 50px;
 }

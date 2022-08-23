@@ -50,6 +50,11 @@ function mainWindow() {
     toDoName.textContent = 'a To Do';
     toDoItem.appendChild(toDoName);
 
+    const toDoPriority = document.createElement('div');
+    toDoPriority.classList.add('toDoPriority');
+    toDoPriority.textContent = 'High';
+    toDoItem.appendChild(toDoPriority);
+
     const toDoDate = document.createElement('div');
     toDoDate.classList.add('toDoDate');
     toDoDate.textContent = '18:30';
