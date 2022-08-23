@@ -59,8 +59,80 @@ function mainWindow() {
     toDoDate.classList.add('toDoDate');
     toDoDate.textContent = '18:30';
     toDoItem.appendChild(toDoDate);
+
+    const newButton = document.createElement('div');
+    newButton.setAttribute('id', 'newBtn');
+    newButton.textContent = '+';
+    toDoHeader.appendChild(newButton);
+
+}
+
+function createToDo() {
+    const mainWindow = document.getElementById('toDoPlace');
+    const itemWindow = document.createElement('div');
+    itemWindow.setAttribute('id', 'itemWindow');
+
+    const titlePlace = document.createElement('input');
+    titlePlace.setAttribute('id', 'titlePlace');
+    titlePlace.setAttribute('placeholder', 'Task name');
+    itemWindow.appendChild(titlePlace);
+
+    const descriptionPlace = document.createElement('textarea');
+    descriptionPlace.setAttribute('id', 'descriptionPlace');
+    descriptionPlace.setAttribute('placeholder', 'Task description');
+    itemWindow.appendChild(descriptionPlace);
+
+    const priorityHigh = document.createElement('div');
+    priorityHigh.classList.add('priority');
+    priorityHigh.textContent = 'High priority';
+    const highRadio = document.createElement('input');
+    highRadio.setAttribute('type', 'radio');
+    highRadio.setAttribute('name', 'chosePriority')
+    priorityHigh.appendChild(highRadio);
+    itemWindow.appendChild(priorityHigh);
+
+    const priorityMedium = document.createElement('div');
+    priorityMedium.classList.add('priority');
+    priorityMedium.textContent = 'Medium priority';
+    const mediumRadio = document.createElement('input');
+    mediumRadio.setAttribute('type', 'radio');
+    mediumRadio.setAttribute('name', 'chosePriority');
+    priorityMedium.appendChild(mediumRadio);
+    itemWindow.appendChild(priorityMedium);
+
+    const priorityLow = document.createElement('div');
+    priorityLow.classList.add('priority');
+    priorityLow.textContent = 'Low priority';
+    const lowRadio = document.createElement('input');
+    lowRadio.setAttribute('type', 'radio');
+    lowRadio.setAttribute('name', 'chosePriority');
+    priorityLow.appendChild(lowRadio);
+    itemWindow.appendChild(priorityLow);
+
+    const buttonPlace = document.createElement('div');
+    buttonPlace.classList.add('buttonPlace');
+    const createButton = document.createElement('button');
+    createButton.setAttribute('value', 'Create');
+    createButton.textContent = 'Create';
+    buttonPlace.appendChild(createButton);
+    const cancelButton = document.createElement('button');
+    cancelButton.setAttribute('value', 'Cancel');
+    cancelButton.textContent = 'Cancel';
+    buttonPlace.appendChild(cancelButton);
+
+    itemWindow.appendChild(buttonPlace);
+
+    mainWindow.appendChild(itemWindow);
+}
+
+function createToDoListeners() {
+
+    const toDoBtn = document.getElementById('newBtn');
+    toDoBtn.addEventListener('click', createToDo);
 }
 
 export {
     mainWindow,
+    createToDo,
+    createToDoListeners,
 }
