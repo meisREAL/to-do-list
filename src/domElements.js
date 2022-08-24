@@ -1,3 +1,5 @@
+import { myToDos, pushToDO, toDo } from "./to-do";
+
 function mainWindow() {
     const mainDiv = document.getElementById('main');
 
@@ -36,29 +38,6 @@ function mainWindow() {
     const todoPlace = document.createElement('div');
     todoPlace.setAttribute('id', 'toDoPlace');
     toDoDiv.appendChild(todoPlace);
-
-    const toDoItem = document.createElement('div');
-    toDoItem.classList.add('toDoItem');
-    todoPlace.appendChild(toDoItem);
-
-    const checkBox = document.createElement('input')
-    checkBox.setAttribute('type', 'checkbox');
-    toDoItem.appendChild(checkBox);
-
-    const toDoName = document.createElement('div');
-    toDoName.classList.add('toDoName');
-    toDoName.textContent = 'a To Do';
-    toDoItem.appendChild(toDoName);
-
-    const toDoPriority = document.createElement('div');
-    toDoPriority.classList.add('toDoPriority');
-    toDoPriority.textContent = 'High';
-    toDoItem.appendChild(toDoPriority);
-
-    const toDoDate = document.createElement('div');
-    toDoDate.classList.add('toDoDate');
-    toDoDate.textContent = '18:30';
-    toDoItem.appendChild(toDoDate);
 
     const newButton = document.createElement('div');
     newButton.setAttribute('id', 'newBtn');
@@ -119,8 +98,23 @@ function createToDo() {
     cancelButton.setAttribute('value', 'Cancel');
     cancelButton.textContent = 'Cancel';
     buttonPlace.appendChild(cancelButton);
+
     cancelButton.onclick = function () {
         itemWindow.remove(itemWindow);
+    }
+    createButton.onclick = function () {
+        let priority;
+        if (lowRadio.checked) {
+            priority = 'Low';
+        } else if (mediumRadio.checked) {
+            priority = 'Medium';
+        } else if (highRadio.checked) {
+            priority = 'High';
+        }
+        let task = toDo(titlePlace.value, descriptionPlace.value, priority)
+        pushToDO(task);
+        itemWindow.remove(itemWindow);
+        displayToDo(titlePlace.value, priority)
     }
 
     itemWindow.appendChild(buttonPlace);
@@ -134,8 +128,31 @@ function createToDoListeners() {
     toDoBtn.addEventListener('click', createToDo);
 }
 
-function cancelPopUpListener() {
+function displayToDo(name, priority) {
+    const toDoPlace = document.getElementById('toDoPlace');
 
+    const toDoItem = document.createElement('div');
+    toDoItem.classList.add('toDoItem');
+    toDoPlace.appendChild(toDoItem);
+
+    const checkBox = document.createElement('input')
+    checkBox.setAttribute('type', 'checkbox');
+    toDoItem.appendChild(checkBox);
+
+    const toDoName = document.createElement('div');
+    toDoName.classList.add('toDoName');
+    toDoName.textContent = name;
+    toDoItem.appendChild(toDoName);
+
+    const toDoPriority = document.createElement('div');
+    toDoPriority.classList.add('toDoPriority');
+    toDoPriority.textContent = priority
+    toDoItem.appendChild(toDoPriority);
+
+    const toDoDate = document.createElement('div');
+    toDoDate.classList.add('toDoDate');
+    toDoDate.textContent = '18:30';
+    toDoItem.appendChild(toDoDate);
 }
 
 export {
