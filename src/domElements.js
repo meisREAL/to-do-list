@@ -141,16 +141,17 @@ function displayToDo() { //displays to dos from array
         toDoItem.setAttribute('data-index-number', `${i}`);
         toDoPlace.appendChild(toDoItem);
 
-        // const checkBox = document.createElement('input')
-        // checkBox.setAttribute('type', 'checkbox');
-        // checkBox.classList.add('checkToDo')
-        // toDoItem.appendChild(checkBox);
-
         const removeBtn = document.createElement('div');
         removeBtn.classList.add('removeToDo');
         removeBtn.setAttribute('data-index-number', `${i}`);
         removeBtn.textContent = 'Done?';
         toDoItem.appendChild(removeBtn);
+
+        const viewBtn = document.createElement('div');
+        viewBtn.classList.add('viewToDo');
+        viewBtn.setAttribute('data-index-number', `${i}`);
+        viewBtn.textContent = 'View'
+        toDoItem.appendChild(viewBtn);
 
         const toDoName = document.createElement('div');
         toDoName.classList.add('toDoName');
@@ -168,6 +169,7 @@ function displayToDo() { //displays to dos from array
         toDoItem.appendChild(toDoDate);
     }
     deleteToDoListeners();
+    listenersToViewToDo()
 }
 
 function deleteToDo() {
@@ -183,8 +185,50 @@ function deleteToDoListeners() {
     }
 }
 
+function viewToDo() {
+    let place = this.dataset.indexNumber;
+
+    const mainWindow = document.getElementById('toDoPlace');
+    const viewWindow = document.createElement('div');
+    viewWindow.setAttribute('id', 'viewWindow');
+
+    const title = document.createElement('div');
+    title.classList.add('viewTitle');
+    title.textContent = myToDos[place].title;
+    viewWindow.appendChild(title);
+
+    const description = document.createElement('div');
+    description.classList.add('viewDescription');
+    description.textContent = myToDos[place].description;
+    viewWindow.appendChild(description);
+
+    const priority = document.createElement('div');
+    priority.classList.add('viewPriority');
+    priority.textContent = myToDos[place].priority;
+    viewWindow.appendChild(priority);
+
+    const closeBtn = document.createElement('div');
+    closeBtn.classList.add('viewClose');
+    closeBtn.textContent = 'Close';
+    closeBtn.onclick = function () {
+        viewWindow.remove(viewWindow);
+    };
+
+    viewWindow.appendChild(closeBtn);
+
+    mainWindow.appendChild(viewWindow);
+}
+
+function listenersToViewToDo() {
+    let theToDos = document.querySelectorAll('.viewToDo');
+    for (let i = 0; i < theToDos.length; i++) {
+        theToDos[i].addEventListener('click', viewToDo);
+    }
+}
+
 export {
     mainWindow,
     createToDo,
     createToDoListeners,
+    viewToDo,
 }

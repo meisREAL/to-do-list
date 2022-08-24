@@ -1,7 +1,7 @@
-import { mainWindow, createToDo, createToDoListeners } from "./domElements";
-import { myToDos, pushToDO, toDo } from "./to-do";
+import { mainWindow, createToDoListeners, viewToDo } from "./domElements";
 import './style.css'
 
 mainWindow();
 createToDoListeners();
+// viewToDo();
 // createToDo();
