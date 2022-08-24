@@ -46,7 +46,7 @@ function mainWindow() {
 
 }
 
-function createToDo() {
+function createToDo() { //this is a button to create new to do
     const mainWindow = document.getElementById('toDoPlace');
     const itemWindow = document.createElement('div');
     itemWindow.setAttribute('id', 'itemWindow');
@@ -102,6 +102,7 @@ function createToDo() {
     cancelButton.onclick = function () {
         itemWindow.remove(itemWindow);
     }
+
     createButton.onclick = function () {
         let priority;
         if (lowRadio.checked) {
@@ -114,11 +115,10 @@ function createToDo() {
         let task = toDo(titlePlace.value, descriptionPlace.value, priority)
         pushToDO(task);
         itemWindow.remove(itemWindow);
-        displayToDo(titlePlace.value, priority)
+        displayToDo()
     }
 
     itemWindow.appendChild(buttonPlace);
-
     mainWindow.appendChild(itemWindow);
 }
 
@@ -128,31 +128,59 @@ function createToDoListeners() {
     toDoBtn.addEventListener('click', createToDo);
 }
 
-function displayToDo(name, priority) {
+function displayToDo() { //displays to dos from array 
     const toDoPlace = document.getElementById('toDoPlace');
 
-    const toDoItem = document.createElement('div');
-    toDoItem.classList.add('toDoItem');
-    toDoPlace.appendChild(toDoItem);
+    while (toDoPlace.firstChild) {
+        toDoPlace.removeChild(toDoPlace.firstChild);
+    }
 
-    const checkBox = document.createElement('input')
-    checkBox.setAttribute('type', 'checkbox');
-    toDoItem.appendChild(checkBox);
+    for (let i = 0; i < myToDos.length; i++) {
+        const toDoItem = document.createElement('div');
+        toDoItem.classList.add('toDoItem');
+        toDoItem.setAttribute('data-index-number', `${i}`);
+        toDoPlace.appendChild(toDoItem);
 
-    const toDoName = document.createElement('div');
-    toDoName.classList.add('toDoName');
-    toDoName.textContent = name;
-    toDoItem.appendChild(toDoName);
+        // const checkBox = document.createElement('input')
+        // checkBox.setAttribute('type', 'checkbox');
+        // checkBox.classList.add('checkToDo')
+        // toDoItem.appendChild(checkBox);
 
-    const toDoPriority = document.createElement('div');
-    toDoPriority.classList.add('toDoPriority');
-    toDoPriority.textContent = priority
-    toDoItem.appendChild(toDoPriority);
+        const removeBtn = document.createElement('div');
+        removeBtn.classList.add('removeToDo');
+        removeBtn.setAttribute('data-index-number', `${i}`);
+        removeBtn.textContent = 'Done?';
+        toDoItem.appendChild(removeBtn);
 
-    const toDoDate = document.createElement('div');
-    toDoDate.classList.add('toDoDate');
-    toDoDate.textContent = '18:30';
-    toDoItem.appendChild(toDoDate);
+        const toDoName = document.createElement('div');
+        toDoName.classList.add('toDoName');
+        toDoName.textContent = myToDos[i].title;
+        toDoItem.appendChild(toDoName);
+
+        const toDoPriority = document.createElement('div');
+        toDoPriority.classList.add('toDoPriority');
+        toDoPriority.textContent = myToDos[i].priority;
+        toDoItem.appendChild(toDoPriority);
+
+        const toDoDate = document.createElement('div');
+        toDoDate.classList.add('toDoDate');
+        toDoDate.textContent = '18:30';
+        toDoItem.appendChild(toDoDate);
+    }
+    deleteToDoListeners();
+}
+
+function deleteToDo() {
+    let place = this.dataset.indexNumber;
+    myToDos.splice(place, 1);
+    displayToDo();
+}
+
+function deleteToDoListeners() {
+    let removeBtn = document.querySelectorAll('.removeToDo');
+    for (let i = 0; i < removeBtn.length; i++) {
+        removeBtn[i].addEventListener('click', deleteToDo);
+    }
 }
 
 export {

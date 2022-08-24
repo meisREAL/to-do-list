@@ -9,9 +9,6 @@ const pushToDO = (aToDo) => {
     console.log(myToDos);
 }
 
-let task = toDo('clean mouse', 'clean my mouse', 'high');
-pushToDO(task);
-
 export {
     myToDos,
     toDo,
